@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import numpy as np
+from sklearn.model_selection import train_test_split
 from models.model_utils import train_and_save_model, load_trained_components, preprocess_data
 from views.ui import (
     show_main_interface,
@@ -9,8 +10,10 @@ from views.ui import (
     show_model_metrics,
     show_error_analysis,
     show_author_search,
-    show_document_checker
+    show_document_checker,
+    show_training_analysis
 )
+
 
 
 def predict_compliance(input_data, model, scaler, label_encoder):
@@ -55,16 +58,36 @@ def main():
                                   list(datasets.keys()))
     df = datasets[dataset_choice]
 
-    if os.path.exists('models/trained_model/model.h5'):
-        model, scaler, label_encoder = load_trained_components()
+    # Инициализируем переменные для данных обучения
+    X, y, _ = preprocess_data(df)
+    _, X_test, _, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+    # 2. Кнопка принудительного переобучения
+    force_retrain = st.button("Переобучить модель на текущем датасете")
+
+    history_data = None
+    model_exists = os.path.exists('models/trained_model/model.h5')
+
+    # 3. Определяем, нужно ли обучать модель
+    if force_retrain or not model_exists:
+        with st.spinner("Модель обучается... Это может занять некоторое время."):
+            model, scaler, label_encoder, history_data, _, _ = train_and_save_model(df)
+        st.success("✅ Модель обучена и сохранена!")
+    else:
+        # Загружаем существующую модель
+        model, scaler, label_encoder, history_data = load_trained_components()
         if model is not None:
             st.success("✅ Используется сохраненная модель")
         else:
+            # Если загрузка не удалась, все равно обучаем
             st.warning("⚠️ Не удалось загрузить модель. Будет выполнено переобучение...")
-            model, scaler, label_encoder = train_and_save_model(df)
-    else:
-        model, scaler, label_encoder = train_and_save_model(df)
-        st.success("✅ Модель обучена и сохранена")
+            with st.spinner("Модель обучается..."):
+                model, scaler, label_encoder, history_data, _, _ = train_and_save_model(df)
+            st.success("✅ Модель обучена и сохранена!")
+
+    if model:
+        # Метрики и графики теперь можно показывать всегда
+        show_training_analysis(history_data, model, X_test, y_test, scaler)
 
     if 'metrics' not in st.session_state:
         X, y, _ = preprocess_data(df)
