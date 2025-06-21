@@ -1,0 +1,41 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      256,
+      128,
+      64,
+      32
+    ],
+    "dropout_rates": [
+      0.4,
+      0.3,
+      0.2
+    ],
+    "use_batchnorm": true,
+    "use_noise": true,
+    "noise_stddev": 0.1,
+    "kernel_regularizer": {
+      "l1": 1e-05,
+      "l2": 0.0001
+    },
+    "kernel_constraint": 3.0
+  },
+  "training": {
+    "optimizer": "nadam",
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "epochs": 100,
+    "patience": 15,
+    "lr_patience": 5,
+    "min_lr": 1e-06,
+    "validation_split": 0.2,
+    "use_kfold": false,
+    "k_folds": 5
+  },
+  "preprocessing": {
+    "feature_selection": true,
+    "n_features": "all",
+    "discretize_numeric": false,
+    "n_bins": 5
+  }
+}

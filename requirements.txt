@@ -1,0 +1,17 @@
+gost_checker/
+│
+├── vm_main.py              # Главный исполняемый файл
+├── config.py               # Конфигурационные константы
+├── models/
+│   ├── model_utils.py      # Функции для работы с моделью
+│   └── trained_model/      # Папка для сохранения обученных моделей
+│       ├── model.h5
+│       ├── scaler.pkl
+│       └── label_encoder.pkl
+├── data/
+│   └── default_dataset.csv # Встроенный датасет для обучения
+├── utils/
+│   ├── gost_rules.py       # Правила ГОСТ и функции проверки
+│   └── validation.py       # Функции валидации
+└── views/
+    └──  ui.py               # Пользовательский интерфейс
