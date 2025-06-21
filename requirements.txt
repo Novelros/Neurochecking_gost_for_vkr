@@ -2,6 +2,7 @@ gost_checker/
 │
 ├── vm_main.py              # Главный исполняемый файл
 ├── config.py               # Конфигурационные константы
+├── docx_processor.py       # Чтение файла, но пока не работает
 ├── models/
 │   ├── model_utils.py      # Функции для работы с моделью
 │   └── trained_model/      # Папка для сохранения обученных моделей
@@ -15,3 +16,11 @@ gost_checker/
 │   └── validation.py       # Функции валидации
 └── views/
     └──  ui.py               # Пользовательский интерфейс
+
+tensorflow==2.12.0
+scikit-learn==1.2.2
+pandas==2.0.1
+numpy==1.24.3
+joblib==1.2.0
+streamlit==1.22.0
+
