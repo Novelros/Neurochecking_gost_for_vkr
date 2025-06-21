@@ -3,8 +3,11 @@
 Для запуска веб-интерфейса выполните команду: streamlit run vm_main.py После этого откроется браузер с интерактивным интерфейсом проверки документов на соответствие ГОСТ.
 Вот сам проект: 
 <img width="541" alt="{5F26DC63-748F-45A0-9A8C-F5BA0E5F9CE7}" src="https://github.com/user-attachments/assets/7860fbd6-5d38-40dd-a66e-c4ba921ab75d" />
+
 <img width="485" alt="{021DAE15-0421-4069-8D7A-CB79DE18D506}" src="https://github.com/user-attachments/assets/859b86ba-507c-47e1-ade3-eae5cd635d95" />
+
 <img width="498" alt="{36AB94BC-1453-4BBC-9A84-6C59326258E5}" src="https://github.com/user-attachments/assets/ca195322-6812-40d3-a824-a43f8d3a7087" />
+
 <img width="486" alt="{0451B470-BA29-4D67-9624-44C4842B071B}" src="https://github.com/user-attachments/assets/9bf9f417-d005-454e-b7bd-1abebf73421c" />
 
 Для правильной работы программ необходимо установить библиотеки, указанные в файле requirements.txt
